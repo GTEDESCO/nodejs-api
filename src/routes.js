@@ -3,7 +3,8 @@ import { Router } from 'express';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 
-import { storeSchema } from './app/validators/User';
+import { storeSchema, updateSchema } from './app/validators/User';
+import loginSchema from './app/validators/Session';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -13,12 +14,14 @@ routes.get('/', (req, res) => {
   return res.json({ message: 'Servidor no ar!' });
 });
 
-routes.post('/sessions', SessionController.store);
+routes.post('/login', loginSchema, SessionController.store);
 
 routes.use(authMiddleware);
 
-routes.get('/users', UserController.index);
+routes.get('/users/:page?', UserController.index);
+routes.get('/users/:id', UserController.show);
 routes.post('/users', storeSchema, UserController.store);
-routes.put('/users', UserController.update);
+routes.put('/users/:id', updateSchema, UserController.update);
+routes.delete('/users/:id', UserController.delete);
 
 export default routes;
