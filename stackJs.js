@@ -165,6 +165,11 @@
   yarn add tedious
   yarn add sqlite3 -D
   yarn add supertest -D
+  yarn add @sentry/node@5.7.0
+  yarn add cors
+  yarn add helmet
+  yarn add factory-girl -D
+  yarn add faker -D
 
   FILES
 

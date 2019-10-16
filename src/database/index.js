@@ -20,7 +20,8 @@ class Database {
   }
 
   mongo() {
-    this.mongoConnection = mongoose.connect(process.env.DB_URI, {
+    this.mongoConnection = mongoose.connect(process.env.DB_URL, {
+      useUnifiedTopology: true,
       useNewUrlParser: true,
       useFindAndModify: true,
     });

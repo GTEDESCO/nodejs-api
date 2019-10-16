@@ -1,12 +1,13 @@
 import User from '../models/User';
-import { storeSchema } from '../validators/User';
 
 class UserController {
-  async store(req, res) {
-    if (!(await storeSchema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Campos faltando!' });
-    }
+  async index(req, res) {
+    const users = User.findAll();
 
+    return res.json(users);
+  }
+
+  async store(req, res) {
     const userExists = await User.findOne({ where: { email: req.body.email } });
 
     if (userExists) {
