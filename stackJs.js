@@ -353,6 +353,10 @@
 
   yarn sequelize db:migrate
 
+  yarn sequelize seed:generate --name demo-user
+
+  yarn sequelize db:seed:all // db:seed:undo:all
+
   models/User.js
   import Sequelize, { Model } from 'sequelize';
   import bcrypt from 'bcryptjs';
