@@ -27,6 +27,54 @@
   NODEJS.org
   YARN
 
+  VSCODE SETTINGS
+  {
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Dracula",
+    "workbench.iconTheme": "material-icon-theme",
+    "window.zoomLevel": 0,
+    "editor.fontSize": 14,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+
+    "editor.rulers": [80, 120],
+    "eslint.autoFixOnSave": true,
+    "editor.formatOnSave": false,
+    "eslint.validate": [
+      {
+        "language": "javascript",
+        "autoFix": true
+      },
+      {
+        "language": "javascriptreact",
+        "autoFix": true
+      },
+      {
+        "language": "typescript",
+        "autoFix": true
+      },
+      {
+        "language": "typescriptreact",
+        "autoFix": true
+      }
+    ],
+
+    "editor.renderLineHighlight": "gutter",
+    "editor.tabSize": 2,
+    "terminal.integrated.fontSize": 14,
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+    },
+    "emmet.syntaxProfiles": {
+      "javascript": "jsx"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "editor.parameterHints.enabled": false,
+    "breadcrumbs.enabled": true,
+    "javascript.suggest.autoImports": false,
+  }
+
+
   EXPLICAÇÃO NODEJS / Javascript
 
   EVENT LOOP -> Arquitetura baseado em eventos
