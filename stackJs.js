@@ -478,4 +478,25 @@
   export default mongoose.model('Notification', NotificationSchema);
 
   sentry
+
+  const options = {
+  hooks: {
+    afterCreate: (instance, options) => {
+      saveAuditLog('create', instance, options)
+    },
+    afterUpdate: (instance, options) => {
+      saveAuditLog('update', instance, options);
+    },
+  }
+};
+
+function saveAuditLog(action, model, options) {
+  AuditLog.create({
+    userId: options.userId,
+    actionType: action,
+    table: model._modelOptions.name.plural,
+    prevValues: JSON.stringify(_.pick(model._previousDataValues, model.attributes)),
+    newValues: JSON.stringify(_.pick(model.dataValues, model.attributes)),
+  });
+}
 */
