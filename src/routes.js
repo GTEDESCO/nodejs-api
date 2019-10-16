@@ -14,12 +14,12 @@ routes.get('/', (req, res) => {
   return res.json({ message: 'Servidor no ar!' });
 });
 
-routes.post('/login', loginSchema, SessionController.store);
+routes.post('/sessions', loginSchema, SessionController.store);
 
 routes.use(authMiddleware);
 
 routes.get('/users/:page?', UserController.index);
-routes.get('/users/:id', UserController.show);
+routes.get('/users/show/:id', UserController.show);
 routes.post('/users', storeSchema, UserController.store);
 routes.put('/users/:id', updateSchema, UserController.update);
 routes.delete('/users/:id', UserController.delete);

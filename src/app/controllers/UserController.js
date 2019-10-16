@@ -8,7 +8,7 @@ class UserController {
 
     const opts = {};
 
-    if (page && pageSize) {
+    if (page) {
       opts.offset = (parseInt(page, 10) - 1) * (pageSize || 10);
       opts.limit = pageSize || 10;
     }
