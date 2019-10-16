@@ -114,8 +114,11 @@
   yarn init -y
 
   pastas
+  __tests__
     src
       app
+        schemas
+          Notification.js
         middlewares
           auth.js
         models
@@ -137,8 +140,13 @@
   .sequelizerc
   .env
   .gitignore
+  jest.config.js
 
   yarn add express
+  yarn add jest -D
+  yarn jest --init
+  yarn add @sucrase/jest-plugin -D
+  yarn add @types/jest -D
   yarn add nodemon -D
   yarn add sucrase -D
   yarn add eslint -D
@@ -152,6 +160,11 @@
   yarn add jsonwebtoken
   yarn add yup
   yarn add mongoose
+  yarn add express-async-errors
+  yarn add youch
+  yarn add tedious
+  yarn add sqlite3 -D
+  yarn add supertest -D
 
   FILES
 
@@ -256,6 +269,7 @@
 
   database/index.js
   import Sequelize from 'sequelize';
+  import mongoose from 'mongoose';
 
   import User from '../app/models/User';
 
@@ -266,12 +280,20 @@
   class Database {
     constructor() {
       this.init();
+      this.mongo();
     }
 
     init() {
       this.connection = new Sequelize(databaseConfig);
 
       models.map(model => model.init(this.connection));
+    }
+
+    mongo() {
+      this.mongoConnection = mongoose.connect(databaseConfig.uri, {
+        useNewUrlParser: true,
+        useFindAndModify: true,
+      });
     }
   }
 
@@ -287,8 +309,8 @@
   yarn sequelize migration:create --name=create-users
 
   module.exports = {
-    up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('users', {
+     up: (queryInterface, Sequelize) => {
+      returnqueryInterface.createTable('users', {
         id: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -323,6 +345,8 @@
       return queryInterface.dropTable('users');
     },
   };
+
+  yarn sequelize db:migrate
 
   models/User.js
   import Sequelize, { Model } from 'sequelize';
@@ -422,5 +446,31 @@
     }
   };
 
+  schemas/Notification.js
+  import mongoose from 'mongoose';
 
+  const NotificationSchema = new mongoose.Schema(
+    {
+      content: {
+        type: String,
+        required: true,
+      },
+      user: {
+        type: Number,
+        required: true,
+      },
+      read: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
+    },
+    {
+      timestamps: true,
+    }
+  );
+
+  export default mongoose.model('Notification', NotificationSchema);
+
+  sentry
 */
