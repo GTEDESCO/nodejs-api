@@ -1,3 +1,5 @@
 import app from './app';
 
-app.listen(8000);
+console.info(`Started on: http://localhost:${process.env.PORT || 33333}`);
+
+app.listen(process.env.PORT || 3333);

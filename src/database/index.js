@@ -1,30 +1,21 @@
 import Sequelize from 'sequelize';
-import mongoose from 'mongoose';
-
-import User from '../app/models/User';
-
+import models from '../app/models';
 import databaseConfig from '../config/database';
 
-const models = [User];
+const modelsArray = Object.values(models);
 
 class Database {
   constructor() {
     this.init();
-    this.mongo();
   }
 
   init() {
     this.connection = new Sequelize(databaseConfig);
 
-    models.map(model => model.init(this.connection));
-  }
-
-  mongo() {
-    this.mongoConnection = mongoose.connect(process.env.DB_URL, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useFindAndModify: true,
-    });
+    modelsArray.map(model => model.init(this.connection));
+    modelsArray.map(
+      model => model.associate && model.associate(this.connection.models)
+    );
   }
 }
 
